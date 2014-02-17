@@ -21,11 +21,20 @@ $Bootstrap->getClassLoader()->add('Everon\DataMapper', $Environment->getDataMapp
 $Bootstrap->getClassLoader()->add('Everon\Domain', $Environment->getDomain());
 $Bootstrap->getClassLoader()->add('Everon\Module', $Environment->getModule());
 
-
 $Container->register('Request', function() use ($Factory) {
-    return $Factory->buildRequest($_SERVER, $_GET, $_POST, $_FILES, 'Everon\Rest');
+    $post = json_decode(file_get_contents('php://input'), true);
+    if ($post === null) {
+        $post = [];
+    }
+    return $Factory->buildRequest($_SERVER, $_GET, $post, $_FILES, 'Everon\Rest');
 });
 
+$Container->register('Response', function() use ($Factory) {
+    $Factory->getDependencyContainer()->monitor('Response', ['Everon\Logger']);
+    $Logger = $Factory->getDependencyContainer()->resolve('Logger');
+    $Headers = $Factory->buildHttpHeaderCollection([]);
+    return $Factory->buildHttpResponse($Logger->getGuid(), $Headers);
+});
 //replace default Router
 $Container->register('Router', function() use ($Factory) {
     $RouteConfig = $Factory->getDependencyContainer()->resolve('ConfigManager')->getConfigByName('router');

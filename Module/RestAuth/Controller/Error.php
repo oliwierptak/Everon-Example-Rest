@@ -9,9 +9,9 @@ use Everon\Rest;
 /**
  * @method \Everon\Module\RestAuth\Module getModule()
  */
-class Auth extends Rest\Controller implements Rest\Interfaces\Controller
+class Error extends Rest\Controller implements Rest\Interfaces\Controller
 {
-    public function login()
+    public function show()
     {
         dd($this);
         dd($this->getRequest(), $this->getResponse());
