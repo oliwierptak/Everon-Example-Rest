@@ -16,6 +16,7 @@ require_once(
     implode(DIRECTORY_SEPARATOR,
         [dirname(__FILE__), '..', 'Config', 'Bootstrap', 'rest.php']));
 
+
 $Guid->setSystemMemoryAtStart($system_memory);
-$RestServer = $Factory->buildRest();
+$RestServer = $Factory->buildRestServer();
 $RestServer->run($Guid);

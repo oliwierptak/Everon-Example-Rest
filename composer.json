@@ -1,0 +1,22 @@
+{
+    "name": "everon/everon-example-rest",
+    "description": "REST application example for Everon framework",
+    "license": "MIT",
+    "authors": [{
+        "name": "Oliwier Ptak",
+        "email": "oliwierptak@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "everon/everon": "master",
+        "php": "~5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Everon\\": "vendor/everon/everon/src/"
+        }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@github.com-everon:oliwierptak/Everon.git" }
+    ]
+}

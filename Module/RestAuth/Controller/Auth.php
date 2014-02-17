@@ -1,13 +1,13 @@
 <?php
 
-namespace Everon\Module\Auth\Controller;
+namespace Everon\Module\RestAuth\Controller;
 
 use Everon\Dependency;
 use Everon\Interfaces;
 use Everon\Rest;
 
 /**
- * @method \Everon\Module\Auth\Module getModule()
+ * @method \Everon\Module\RestAuth\Module getModule()
  */
 class Auth extends Rest\Controller implements Rest\Interfaces\Controller
 {

@@ -17,14 +17,30 @@ implode(DIRECTORY_SEPARATOR,
  * @var Interfaces\Factory $Factory
  */
 
-$Bootstrap->getClassLoader()->add('Everon\Rest\Controller', $Environment->getController().'Console'.DIRECTORY_SEPARATOR);
 $Bootstrap->getClassLoader()->add('Everon\DataMapper', $Environment->getDataMapper());
 $Bootstrap->getClassLoader()->add('Everon\Domain', $Environment->getDomain());
 $Bootstrap->getClassLoader()->add('Everon\Module', $Environment->getModule());
+
+
+$Container->register('Request', function() use ($Factory) {
+    return $Factory->buildRequest($_SERVER, $_GET, $_POST, $_FILES, 'Everon\Rest');
+});
 
 //replace default Router
 $Container->register('Router', function() use ($Factory) {
     $RouteConfig = $Factory->getDependencyContainer()->resolve('ConfigManager')->getConfigByName('router');
     $RequestValidator = $Factory->buildRequestValidator();
     return $Factory->buildRouter($RouteConfig, $RequestValidator, 'Everon\Rest');
+});
+
+$Container->register('ConnectionManager', function() use ($Factory) {
+    $Factory->getDependencyContainer()->monitor('ConnectionManager', ['Everon\Config\Manager']);
+    $DatabaseConfig = $Factory->getDependencyContainer()->resolve('ConfigManager')->getDatabaseConfig();
+    return $Factory->buildConnectionManager($DatabaseConfig);
+});
+
+$Container->register('DomainManager', function() use ($Factory) {
+    $Factory->getDependencyContainer()->monitor('DomainManager', ['Everon\DataMapper\Connection\Manager']);
+    $ConnectionManager = $Factory->getDependencyContainer()->resolve('ConnectionManager');
+    return $Factory->buildDomainManager($ConnectionManager);
 });
