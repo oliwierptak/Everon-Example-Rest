@@ -7,14 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Everon\Module\RestAuth;
+namespace Everon\Module\Rest\Interfaces;
 
-use Everon\Module\Rest as RestModule;
 
-/**
- * @method Interfaces\FactoryWorker getFactoryWorker()
- */
-class Module extends RestModule implements \Everon\Module\Interfaces\Rest
+interface FactoryWorker extends \Everon\Interfaces\FactoryWorker
 {
-
 }

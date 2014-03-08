@@ -7,9 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Everon\Module\RestAuth\Interfaces;
+namespace Everon\Module\Rest;
 
+use Everon\FactoryWorker as AbstractFactoryWorker;
 
-interface FactoryWorker extends \Everon\Interfaces\FactoryWorker
+class FactoryWorker extends AbstractFactoryWorker implements Interfaces\FactoryWorker
 {
 }
