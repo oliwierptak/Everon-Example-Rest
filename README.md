@@ -1,4 +1,4 @@
 everon-example-rest
 ===================
 
-Everon-Example-Rest
+Example REST Server with HATEOAS and CORS support, for Everon framework.
